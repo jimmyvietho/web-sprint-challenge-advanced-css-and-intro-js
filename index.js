@@ -214,8 +214,11 @@ console.log(artists[2].bio);
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
-artists[8].name = "Vincent Van Gogh"
-console.log(artists[8].name)
+let removeLastName = artists[8].name.split(" ");
+removeLastName.pop();
+removeLastName.push("Gogh");
+artists[8].name = removeLastName.join(" ");
+console.log(artists[8].name);
 
 /* Task 3: Create a function called `getArtistByIndex` that takes two arguments:
  *     (1) artists array
@@ -237,16 +240,16 @@ getArtistByIndex(artists, 0)
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(array){
+function get20s(array) {
+  let newArr = [];
 
-    let newArtists = [];
-    for (i=0; i < array.length; i++) {
-      if (array[i].years.slice(0, 3).includes("19") == true ) {
-        newArtists.push(array[i].name);
-      }
-    };
-    console.log(newArtists);
+  for (let i in array) {
+    let birthYears = array[i].years.split(" ");
+    if (Number(birthYears[0]) >= 1900 && Number(birthYears[2]) <= 2000)
+      newArr.push(array[i].name);
+  }
 
+  return newArr;
 }
 
 
@@ -280,21 +283,23 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(id, name, years, nationality, bio){
+function addArtist(array, artist) {
+  array.push(artist);
+  return array;
+}
 
-  let obj = {
-    id: id,
-    name: name,
-    years: years,
-    nationality: nationality,
-    bio: bio,
-  }
+   addArtist(artists,  {
+    id: 20,
+    name: "Jimmy Ho",
+    years: "1994-Present",
+    nationality: "Vietnamese",
+    bio: "Lorem Impsum",
+  })
+
+console.log(artists[artists.length-1])
   
-  artists.push(obj);
-  console.log(artists[id])
-  }
 
-addArtist(21, "Jimmy Ho", "1994-present", "Vietnamese", "Lorem Impsum")
+
 
   
 
